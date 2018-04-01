@@ -1,6 +1,6 @@
 package com.blackwell.arraysorts;
 
-public class Array {
+public class Utils {
     public static int[] toIntArray(String[] args){
         String[] strArray = args[0].split(" ");
         int[] arr = new int[strArray.length];

@@ -1,10 +1,19 @@
 package com.blackwell.arraysorts;
 
-import java.util.Arrays;
-
+/**
+ * Будем идти по массиву слева направо. Если текущий элемент больше следующего,
+ * меняем их местами. Делаем так, пока массив не будет отсортирован. Заметим, что
+ * после первой итерации самый большой элемент будет находиться в конце массива, на
+ * правильном месте. После двух итераций на правильном месте будут стоять два
+ * наибольших элемента, и так далее. Очевидно, не более чем после n итераций
+ * массив будет отсортирован. Таким образом, асимптотика в худшем и среднем
+ * случае – O(n2), в лучшем случае – O(n).
+ */
 public class BubbleSort { // снипицы
     public static int[] main(String[] args) {
-        int[] arr = Array.toIntArray(args);
+        long StartTime = System.nanoTime();
+
+        int[] arr = Utils.toIntArray(args);
         int tmp = 0;
 
         for (int i = 0; i < arr.length; ++i) {
@@ -17,6 +26,8 @@ public class BubbleSort { // снипицы
             }
         }
 
+        long EndTime = System.nanoTime();
+        System.out.println("BubbleSort for " + arr.length + "elements: "+(EndTime-StartTime));
         return arr;
     }
 }
