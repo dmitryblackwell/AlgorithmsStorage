@@ -14,44 +14,48 @@ package com.blackwell.arraysorts;
  * она самая быстрая из квадратичных).
  */
 public class QuickSort{
-    public static int[] main(String[] args) {
+
+    private static int[] array;
+
+    public static int[] main(int[] arr) {
+        int startIndex = 0;
+        int endIndex = arr.length-1;
+        array=new int[arr.length];
+        System.arraycopy(arr,0,array,0,arr.length);
+
         long StartTime = System.nanoTime();
 
-        int[] arr = Utils.toIntArray(args);
-        quicksort(arr,0,arr.length-1);
+        doSort(startIndex, endIndex);
 
         long EndTime = System.nanoTime();
-        System.out.println("QuickSort for " + arr.length + "elements: "+(EndTime-StartTime));
+        System.out.println("QuickSort for " + arr.length + " elements: "+(EndTime-StartTime)+ " : "+ (EndTime-StartTime)*Math.pow(10,-9)+" secs");
         return arr;
     }
-    /**
-     * Quicksort - pivot is the first element, descending order
-     * @param array array to be sorted
-     * @param left index of the first element which we can touch
-     * @param right index of the first element which we can't touch
-     */
-    private static void quicksort(int[] array, int left, int right) {
-        if (left < right) {
-            int boundary = left;
-            for (int i = left + 1; i < right; i++) {
-                if (array[i] > array[left]) {
-                    swap(array, i, ++boundary);
-                }
+
+    private static void doSort(int start, int end) {
+        if (start >= end)
+            return;
+        int i = start, j = end;
+        int cur = i - (i - j) / 2;
+        while (i < j) {
+            while (i < cur && (array[i] <= array[cur])) {
+                i++;
             }
-            swap(array, left, boundary);
-            quicksort(array, left, boundary);
-            quicksort(array, boundary + 1, right);
+            while (j > cur && (array[cur] <= array[j])) {
+                j--;
+            }
+            if (i < j) {
+                int temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+                if (i == cur)
+                    cur = j;
+                else if (j == cur)
+                    cur = i;
+            }
         }
+        doSort(start, cur);
+        doSort(cur+1, end);
     }
-    /**
-     * Swaps the elements of the array
-     * @param array array
-     * @param left index of the first element
-     * @param right index of the second element
-     */
-    private static void swap(int[] array, int left, int right) {
-        int tmp = array[right];
-        array[right] = array[left];
-        array[left] = tmp;
-    }
+
 }

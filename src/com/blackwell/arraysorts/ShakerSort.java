@@ -16,10 +16,9 @@ package com.blackwell.arraysorts;
 
 
 public class ShakerSort {
-    public static void main(String[] args) {
+    public static void main(int[] array) {
         long StartTime = System.nanoTime();
 
-        int[] array = Utils.toIntArray(args);
         for (int i = 0; i < array.length/2; i++) {
             boolean swapped = false;
 
@@ -45,6 +44,6 @@ public class ShakerSort {
         }
 
         long EndTime = System.nanoTime();
-        System.out.println("SnakeSort for " + array.length + "elements: "+(EndTime-StartTime));
+        System.out.println("SnakeSort for " + array.length + " elements: "+(EndTime-StartTime) + " : "+ (EndTime-StartTime)*Math.pow(10,-9)+" secs");
     }
 }

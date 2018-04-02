@@ -10,10 +10,9 @@ package com.blackwell.arraysorts;
  * оказался немного быстрее, поэтому он и реализован.
  */
 public class SelectionSort {
-    public static int[] main(String[] args) {
+    public static int[] main(int[] array) {
         long StartTime = System.nanoTime();
 
-        int[] array = Utils.toIntArray(args);
         for (int i = 0; i < array.length - 1; i++) {
 
             int maxIndex = i;
@@ -28,7 +27,7 @@ public class SelectionSort {
         }
 
         long EndTime = System.nanoTime();
-        System.out.println("SelectionSort for " + array.length + "elements: "+(EndTime-StartTime));
+        System.out.println("SelectionSort for " + array.length + " elements: "+(EndTime-StartTime)+ " : "+ (EndTime-StartTime)*Math.pow(10,-9)+" secs");
         return array;
     }
 }

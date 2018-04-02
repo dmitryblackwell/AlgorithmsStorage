@@ -10,10 +10,9 @@ package com.blackwell.arraysorts;
  * случае – O(n2), в лучшем случае – O(n).
  */
 public class BubbleSort { // снипицы
-    public static int[] main(String[] args) {
+    public static int[] main(int[] arr) {
         long StartTime = System.nanoTime();
 
-        int[] arr = Utils.toIntArray(args);
         int tmp = 0;
 
         for (int i = 0; i < arr.length; ++i) {
@@ -27,7 +26,7 @@ public class BubbleSort { // снипицы
         }
 
         long EndTime = System.nanoTime();
-        System.out.println("BubbleSort for " + arr.length + "elements: "+(EndTime-StartTime));
+        System.out.println("BubbleSort for " + arr.length + " elements: "+(EndTime-StartTime)+ " : "+ (EndTime-StartTime)*Math.pow(10,-9)+" secs");
         return arr;
     }
 }
