@@ -13,11 +13,11 @@ package com.blackwell.arraysorts;
  * — наилучшая сортировка, подходящая для этой задачи (хотя не стоит из-за этого думать, что
  * она самая быстрая из квадратичных).
  */
-public class QuickSort{
+public class Quick{
 
     private static int[] array;
 
-    public static int[] main(int[] arr) {
+    public static long sort(int[] arr) {
         int startIndex = 0;
         int endIndex = arr.length-1;
         array=new int[arr.length];
@@ -28,8 +28,7 @@ public class QuickSort{
         doSort(startIndex, endIndex);
 
         long EndTime = System.nanoTime();
-        System.out.println("QuickSort for " + arr.length + " elements: "+(EndTime-StartTime)+ " : "+ (EndTime-StartTime)*Math.pow(10,-9)+" secs");
-        return arr;
+        return EndTime-StartTime;
     }
 
     private static void doSort(int start, int end) {

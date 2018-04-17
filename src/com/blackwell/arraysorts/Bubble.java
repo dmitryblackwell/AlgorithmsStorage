@@ -9,8 +9,8 @@ package com.blackwell.arraysorts;
  * массив будет отсортирован. Таким образом, асимптотика в худшем и среднем
  * случае – O(n2), в лучшем случае – O(n).
  */
-public class BubbleSort { // снипицы
-    public static int[] main(int[] arr) {
+public class Bubble { // снипицы
+    public static long sort(int[] arr) {
         long StartTime = System.nanoTime();
 
         int tmp = 0;
@@ -26,7 +26,6 @@ public class BubbleSort { // снипицы
         }
 
         long EndTime = System.nanoTime();
-        System.out.println("BubbleSort for " + arr.length + " elements: "+(EndTime-StartTime)+ " : "+ (EndTime-StartTime)*Math.pow(10,-9)+" secs");
-        return arr;
+        return EndTime-StartTime;
     }
 }

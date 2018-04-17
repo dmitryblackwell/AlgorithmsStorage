@@ -10,28 +10,10 @@ package com.blackwell.arraysorts;
  * В лучшем случае асимптотика равна O(nlogn), в худшем – O(n2). Какая асимптотика в среднем
  * мне не очень понятно, на практике похоже на O(nlogn).
  */
-public class CombSort {
-    public static void main(int[] array) {
+public class Comb{
+    public static long sort(int[] arr) {
         long StartTime = System.nanoTime();
 
-        sort(array);
-
-        long EndTime = System.nanoTime();
-        System.out.println("CombSort for " + array.length + " elements: "+(EndTime-StartTime) + " : "+ (EndTime-StartTime)*Math.pow(10,-9)+" secs");
-    }
-
-    // To find gap between elements
-    static private int getNextGap(int gap)
-    {
-        // Shrink gap by Shrink factor
-        gap = (gap*10)/13;
-        if (gap < 1)
-            return 1;
-        return gap;
-    }
-
-    // Function to sort arr[] using Comb Sort
-    static private void sort(int arr[]) {
         int n = arr.length;
 
         // initialize gap
@@ -64,6 +46,20 @@ public class CombSort {
                 }
             }
         }
+
+        long EndTime = System.nanoTime();
+        return EndTime-StartTime;
     }
+
+    // To find gap between elements
+    static private int getNextGap(int gap)
+    {
+        // Shrink gap by Shrink factor
+        gap = (gap*10)/13;
+        if (gap < 1)
+            return 1;
+        return gap;
+    }
+
 
 }

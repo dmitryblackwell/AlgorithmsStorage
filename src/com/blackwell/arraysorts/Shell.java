@@ -17,8 +17,8 @@ package com.blackwell.arraysorts;
  * с коэффициентами a = 3, k = 1/3; a = 4, k = 1/4 и a = 4, k = -1/5.
  */
 
-public class ShellSort {
-    public static int[] main(int[] array) {
+public class Shell {
+    public static long sort(int[] array) {
         long StartTime = System.nanoTime();
 
         int gap = array.length / 2;
@@ -41,8 +41,6 @@ public class ShellSort {
 
 
         long EndTime = System.nanoTime();
-        System.out.println("ShellSort for " + array.length + " elements: "+(EndTime-StartTime) + " : "+ (EndTime-StartTime)*Math.pow(10,-9)+" secs");
-
-        return array;
+        return EndTime-StartTime;
     }
 }

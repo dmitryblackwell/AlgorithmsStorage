@@ -9,8 +9,8 @@ package com.blackwell.arraysorts;
  * элемент с рассматриваемым, если они стоят в неправильном порядке. Первый способ
  * оказался немного быстрее, поэтому он и реализован.
  */
-public class SelectionSort {
-    public static int[] main(int[] array) {
+public class Selection {
+    public static long sort(int[] array) {
         long StartTime = System.nanoTime();
 
         for (int i = 0; i < array.length - 1; i++) {
@@ -27,7 +27,6 @@ public class SelectionSort {
         }
 
         long EndTime = System.nanoTime();
-        System.out.println("SelectionSort for " + array.length + " elements: "+(EndTime-StartTime)+ " : "+ (EndTime-StartTime)*Math.pow(10,-9)+" secs");
-        return array;
+        return EndTime-StartTime;
     }
 }

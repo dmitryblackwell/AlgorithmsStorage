@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * например красно-черное, асимптотика будет равна O(nlogn) в худшем, среднем и лучшем случае.
  */
 
-public class TreeSort {
+public class Tree {
     private static class Node{
         int value;
         Node left,right;
@@ -41,7 +41,7 @@ public class TreeSort {
         return arr;
     }
 
-    public static void main(int[] arr) {
+    public static long sort(int[] arr) {
         long StartTime = System.nanoTime();
         Node root = insert(null, arr[0]);
 
@@ -52,7 +52,6 @@ public class TreeSort {
         //System.out.println(list);
 
         long EndTime = System.nanoTime();
-        System.out.println("TreeSort for " + arr.length + " elements: "+(EndTime-StartTime) + " : "+ (EndTime-StartTime)*Math.pow(10,-9)+" secs");
-
+        return EndTime-StartTime;
     }
 }

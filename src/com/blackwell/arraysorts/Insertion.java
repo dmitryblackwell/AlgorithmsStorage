@@ -7,8 +7,8 @@ package com.blackwell.arraysorts;
  * реализовать двумя способами – сохраняя минимум и его индекс или просто переставляя текущий элемент
  * с рассматриваемым, если они стоят в неправильном порядке.
  */
-public class InsertionSort {
-    public static int[] main(int[] array) {
+public class Insertion {
+    public static long main(int[] array) {
         long StartTime = System.nanoTime();
 
         for (int i = 0; i < array.length - 1; i++) {
@@ -24,7 +24,6 @@ public class InsertionSort {
         }
 
         long EndTime = System.nanoTime();
-        System.out.println("InsertionSort for " + array.length + " elements: "+(EndTime-StartTime)+ " : "+ (EndTime-StartTime)*Math.pow(10,-9)+" secs");
-        return array;
+        return EndTime-StartTime;
     }
 }
