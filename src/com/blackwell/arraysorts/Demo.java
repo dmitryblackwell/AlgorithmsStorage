@@ -6,11 +6,10 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
-import java.util.Arrays;
 import java.util.Random;
 
 public class Demo {
-    private static final int ARR_SIZE = 10_000;
+    private static final int ARR_SIZE = 100_000;
     private static final int BOUND = 1000;
 
     private static final String ClassPath = "com.blackwell.arraysorts.";
@@ -24,15 +23,11 @@ public class Demo {
 
     private static void PairsSort(Pair[] p){
         Pair tmp;
-
         for (int i = 0; i < p.length; ++i) {
             for (int j = 1; j < p.length - i; ++j) {
                 long k1 = (long) p[j - 1].getValue();
                 long k2 = (long) p[j].getValue();
                 if (k1 > k2) {
-//                    tmp = new Pair(p[j - 1].getKey(), p[j-1].getValue());
-//                    p[j - 1] = new Pair(p[j].getKey(), p[j].getValue());
-//                    p[j] = new Pair(tmp.getKey(),tmp.getValue());
                     tmp = p[j-1];
                     p[j-1] = p[j];
                     p[j] = tmp;
@@ -43,25 +38,29 @@ public class Demo {
 
     public static void main(String[] args) {
         int[] arr = new int[ARR_SIZE];
-        Pair<String, Long>[] sorts = new Pair[SortsName.length];
+        Pair[] sorts = new Pair[SortsName.length];
 
-        // TODO fix this warnings
         try {
             for(int i=0; i<SortsName.length; ++i) {
                 FeelRandom(arr);
-                Class clazz = Class.forName(ClassPath + SortsName[i]);
+                Class<?> clazz = Class.forName(ClassPath + SortsName[i]);
                 Method m = clazz.getMethod("sort", int[].class);
-                long RunTime = (long) m.invoke(null,arr);
+                long RunTime = (long) m.invoke(null, (Object) arr);
                 sorts[i] = new Pair<>(SortsName[i], RunTime);
                 // System.out.println(Arrays.toString(arr));
+                System.out.println(SortsName[i] + " passed");
             }
         } catch (ClassNotFoundException e) {
+            System.out.println("Class Not Found Exception");
             e.printStackTrace();
         } catch (NoSuchMethodException e) {
+            System.out.println("No Such Method Exception");
             e.printStackTrace();
         } catch (IllegalAccessException e) {
+            System.out.println("Illegal Access Exception");
             e.printStackTrace();
         } catch (InvocationTargetException e) {
+            System.out.println("Invocation Target Exception");
             e.printStackTrace();
         }
         PairsSort(sorts);
