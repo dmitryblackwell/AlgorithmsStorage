@@ -8,14 +8,14 @@ package com.blackwell.arraysorts;
  * с рассматриваемым, если они стоят в неправильном порядке.
  */
 public class Insertion {
-    public static long main(int[] array) {
+    public static long sort(int[] array) {
         long StartTime = System.nanoTime();
 
         for (int i = 0; i < array.length - 1; i++) {
             int j = i + 1;
             int tmp = array[j];
 
-            while (j > 0 && tmp > array[j-1]) {
+            while (j > 0 && tmp < array[j-1]) {
                 array[j] = array[j-1];
                 j--;
             }

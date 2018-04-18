@@ -26,7 +26,7 @@ public class Shell {
             for (int i = 0; i < array.length - gap; i++) { //modified insertion sort
                 int j = i + gap;
                 int tmp = array[j];
-                while (j >= gap && tmp > array[j - gap]) {
+                while (j >= gap && tmp < array[j - gap]) {
                     array[j] = array[j - gap];
                     j -= gap;
                 }

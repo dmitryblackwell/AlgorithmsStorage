@@ -17,7 +17,7 @@ public class Selection {
 
             int maxIndex = i;
             for (int j = i + 1; j < array.length; j++) {
-                if (array[j] > array[maxIndex])
+                if (array[j] < array[maxIndex])
                     maxIndex = j;
             }
 

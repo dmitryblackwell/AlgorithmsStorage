@@ -28,6 +28,7 @@ public class Quick{
         doSort(startIndex, endIndex);
 
         long EndTime = System.nanoTime();
+        System.arraycopy(array,0,arr,0,arr.length);
         return EndTime-StartTime;
     }
 

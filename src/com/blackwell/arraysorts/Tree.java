@@ -32,13 +32,12 @@ public class Tree {
         return n;
     }
 
-    private static ArrayList<Integer> storeSorted(Node n, ArrayList<Integer> arr){
+    private static void storeSorted(Node n, ArrayList<Integer> arr){
         if(n != null){
             storeSorted(n.left, arr);
             arr.add(n.value);
             storeSorted(n.right, arr);
         }
-        return arr;
     }
 
     public static long sort(int[] arr) {
@@ -48,8 +47,10 @@ public class Tree {
         for (int anArr : arr)
             insert(root, anArr);
 
-        ArrayList<Integer> list = storeSorted(root, new ArrayList<>());
-        //System.out.println(list);
+        ArrayList<Integer> list = new ArrayList<>();
+        storeSorted(root, list);
+        for (int i=0; i<arr.length; ++i)
+            arr[i] = list.get(i);
 
         long EndTime = System.nanoTime();
         return EndTime-StartTime;

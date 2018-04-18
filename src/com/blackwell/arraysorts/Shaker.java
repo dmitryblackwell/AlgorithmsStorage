@@ -23,7 +23,7 @@ public class Shaker {
             boolean swapped = false;
 
             for (int j = i; j < array.length - i - 1; j++) {
-                if (array[j] < array[j + 1]) {
+                if (array[j] > array[j + 1]) {
                     int tmp = array[j];
                     array[j] = array[j + 1];
                     array[j + 1] = tmp;
@@ -32,7 +32,7 @@ public class Shaker {
             }
 
             for (int j = array.length - 2 - i; j > i; j--) {
-                if (array[j] > array[j - 1]) {
+                if (array[j] < array[j - 1]) {
                     int tmp = array[j];
                     array[j] = array[j - 1];
                     array[j - 1] = tmp;
