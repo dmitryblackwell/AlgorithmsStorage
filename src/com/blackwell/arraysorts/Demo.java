@@ -6,14 +6,15 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.util.Arrays;
 import java.util.Random;
 
 public class Demo {
-    private static final int ARR_SIZE = 100_000;
-    private static final int BOUND = 1000;
+    private static final int ARR_SIZE = 10_000;
+    private static final int BOUND = ARR_SIZE*10;
 
     private static final String ClassPath = "com.blackwell.arraysorts.";
-    private static final String[] SortsName = {"Bubble", "Comb", "Shell", "Insertion", "Quick", "Selection", "Shaker", "Tree", "Gnome"};
+    private static final String[] SortsName = {"Bubble", "Comb", "Shell", "Insertion", "Quick", "Selection", "Shaker", "Tree", "Gnome", "Merge"};
 
     private static void FeelRandom(int[] arr){
         Random R = new Random();
@@ -47,8 +48,8 @@ public class Demo {
                 Method m = clazz.getMethod("sort", int[].class);
                 long RunTime = (long) m.invoke(null, (Object) arr);
                 sorts[i] = new Pair<>(SortsName[i], RunTime);
-                // System.out.println(Arrays.toString(arr));
-                System.out.println(SortsName[i] + " passed");
+                //System.out.println(Arrays.toString(arr));
+                //System.out.println(SortsName[i] + " passed");
             }
         } catch (ClassNotFoundException e) {
             System.out.println("Class Not Found Exception");
@@ -68,8 +69,8 @@ public class Demo {
         DecimalFormat df = new DecimalFormat("#.###");
         df.setRoundingMode(RoundingMode.CEILING);
         for (Pair p : sorts) {
-            System.out.println(p.getKey() +": "+ df.format((long) p.getValue() * Math.pow(10,-9)));
+            String time = df.format((long) p.getValue() * Math.pow(10,-9)) + " secs";
+            System.out.format("%15s%15s\n",p.getKey(),time);
         }
-
     }
 }
