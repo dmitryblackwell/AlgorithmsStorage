@@ -14,7 +14,7 @@ public class Demo {
     private static final int BOUND = ARR_SIZE*10;
 
     private static final String ClassPath = "com.blackwell.arraysorts.";
-    private static final String[] SortsName = {"Bubble", "Comb", "Shell", "Insertion", "Quick", "Selection", "Shaker", "Tree", "Gnome", "Merge"};
+    private static final String[] SortsName = {"Bubble", "Comb", "Shell", "Insertion", "Quick", "Selection", "Shaker", "Tree", "Gnome", "Merge", "Heap"};
 
     private static void FeelRandom(int[] arr){
         Random R = new Random();
@@ -48,7 +48,7 @@ public class Demo {
                 Method m = clazz.getMethod("sort", int[].class);
                 long RunTime = (long) m.invoke(null, (Object) arr);
                 sorts[i] = new Pair<>(SortsName[i], RunTime);
-                //System.out.println(Arrays.toString(arr));
+                System.out.println(Arrays.toString(arr));
                 //System.out.println(SortsName[i] + " passed");
             }
         } catch (ClassNotFoundException e) {
