@@ -15,7 +15,7 @@ public class Demo {
 
     private static final String ClassPath = "com.blackwell.arraysorts.";
     private static final String[] SortsName = {"Bubble", "Comb", "Shell", "Insertion", "Quick", "Selection",
-            "Shaker", "Tree", "Gnome", "Merge", "Heap", "Counting", "Radix", "Bucket"};
+            "Shaker", "Tree", "Gnome", "Merge", "Heap", "Counting", "Radix", "Bucket", "Bitonic"};
 
     private static void FeelRandom(int[] arr){
         Random R = new Random();
