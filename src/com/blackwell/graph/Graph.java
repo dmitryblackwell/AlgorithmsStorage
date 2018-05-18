@@ -1,4 +1,4 @@
-package com.blackwell.tree;
+package com.blackwell.graph;
 
 import java.lang.*;
 

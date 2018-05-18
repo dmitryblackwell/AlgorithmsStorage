@@ -1,23 +1,22 @@
 package com.blackwell.tree;
 
-
 import java.util.ArrayList;
 import java.util.PriorityQueue;
 
 public class Huffman {
 
-    public static class HuffNode implements Comparable<HuffNode> {
-        // fields
-        public int value;
-        public int weight;
-        public HuffNode leftTree;
-        public HuffNode rightTree;
-        public HuffNode parent;
+    public static class Node implements Comparable<Node> {
 
-        // constructors
-        HuffNode() { parent = null; }
+        int value;
+        int weight;
+        Node leftTree;
+        Node rightTree;
+        Node parent;
 
-        HuffNode( int v, int w, HuffNode lTree, HuffNode rTree, HuffNode par ) {
+
+        Node() { parent = null; }
+
+        Node(int v, int w, Node lTree, Node rTree, Node par ) {
             value = v;
             weight = w;
             leftTree = lTree;
@@ -25,10 +24,8 @@ public class Huffman {
             parent = par;
         }
 
-        // setters/getters
-
         @Override
-        public int compareTo(HuffNode rhs) { return weight - rhs.weight; }
+        public int compareTo(Node rhs) { return weight - rhs.weight; }
 
         @Override
         public String toString() {
@@ -38,192 +35,151 @@ public class Huffman {
         }
     }
 
-    // object representing a huffman tree
-    public static class HuffTree {
-        // fields
-        private int size = 0;
-        private HuffNode root = new HuffNode();
-        private PriorityQueue<HuffNode> huffQueue = new PriorityQueue();
-        public ArrayList<String> pathTable = new ArrayList();
-        public ArrayList<Character> valueTable = new ArrayList();
 
-        // constructor
-        public HuffTree(int[] freq, char[] code) {
-            // get the counts
+    public static class Tree {
+
+        private int size;
+        private Node root = new Node();
+        private PriorityQueue<Node> queue = new PriorityQueue<>();
+        ArrayList<String> path = new ArrayList<>();
+        ArrayList<Character> value = new ArrayList<>();
+
+        Tree(int[] freq, char[] code) {
             this.size = freq.length;
 
-            // throw exception if arrays are different sizes
-            if (freq.length != code.length) {
+            if (freq.length != code.length)
                 throw new UnsupportedOperationException("Error: Character and code length mismatch.");
-            }
 
-            // build huffQueue from frequencies given
-            for (int i = 0; i < this.size; i++) {
-                huffQueue.offer(new HuffNode(code[i], freq[i], null, null, null));
-            }
+            for (int i = 0; i < this.size; i++)
+                queue.offer(new Node(code[i], freq[i], null, null, null));
 
-            // build huffman tree from queue
-            createTree();
-
-            // build code table from huffman tree
-            createTable(this.root, "");
+            create();
+            create(this.root, "");
         }
 
         // setters/getters
 
-        private void createTree() {
-            // while elements remain in huffQueue, add to tree
-            while (huffQueue.size() > 1) {
-                // pop off two minimum elements in huffQueue
-                HuffNode tempL = huffQueue.poll();
-                HuffNode tempR = huffQueue.poll();
+        private void create() {
+            while (queue.size() > 1) {
+                Node tempL = queue.poll();
+                Node tempR = queue.poll();
 
-                // create root for two minimum elements and build tree
-                HuffNode parent = new HuffNode(0, tempL.weight+tempR.weight, tempL, tempR, null);
+                assert tempL != null;
+                assert tempR != null;
+                Node parent = new Node(0, tempL.weight+tempR.weight, tempL, tempR, null);
+
                 tempL.parent = parent;
                 tempR.parent = parent;
 
-                // add new tree back in huffQueue
-                huffQueue.offer(parent);
+                queue.offer(parent);
                 this.size++;
             }
 
-            // set HuffTree root to remaining element in huffQueue
-            this.root = huffQueue.peek();
+            this.root = queue.peek();
         }
 
-        private void createTable(HuffNode curr, String str) {
-            // if iterator is null, return
-            if (curr == null) return;
+        private void create(Node current, String str) {
+            if (current == null) return;
 
-            // else if leaf, display path and value
-            if (curr.leftTree == null && curr.rightTree == null) {
+            if (current.leftTree == null && current.rightTree == null) {
                 char tempChar;
-                if (curr.value == 32)
-                    tempChar = ' ';
 
-                if (curr.value == 10)
+                if (current.value == 10)
                     tempChar = 'n';
-
                 else
-                    tempChar = (char)curr.value;
-                // add value and path to code tables
-                this.valueTable.add(tempChar);
-                this.pathTable.add(str);
+                    tempChar = (char)current.value;
+
+                this.value.add(tempChar);
+                this.path.add(str);
             }
-
-            // add 0 if before moving to left child
             str += "0";
-            // recursively call in pre-order
-            createTable(curr.leftTree, str);
+            create(current.leftTree, str);
 
-            // adjust path and add 1 before moving to right child
             str = str.substring(0, str.length()-1);
             str += "1";
-            createTable(curr.rightTree, str);
+            create(current.rightTree, str);
         }
 
         /**
          * display given huffman tree using pre-order traversal
-         * @param HuffNode -- root of tree to be displayed
+         * global variable used for representing 'levels' of tree
+         * @current -- root of tree to be displayed
          */
-        // global variable used for representing 'levels' of tree
         String tacks = "";
-        public void getTree(HuffNode curr) {
-            // if iterator is null, return
-            if (curr == null) return;
+        void getTree(Node current) {
 
-            // else if leaf, display level, weight, and value
-            if (curr.leftTree == null && curr.rightTree == null) {
-                // case statements to handle displaying space and newline
-                switch (curr.value) {
-                    case 32:
-                        System.out.println(tacks + curr.weight + ": sp");
-                        break;
-                    case 10:
-                        System.out.println(tacks + curr.weight + ": nl");
-                        break;
-                    default:
-                        System.out.println(tacks + curr.weight + ": " + (char)curr.value);
-                        break;
+            if (current == null) return;
+
+            if (current.leftTree == null
+                    && current.rightTree == null) {
+                switch (current.value) {
+                    case 32: System.out.println(tacks + current.weight + ": sp"); break;
+                    case 10: System.out.println(tacks + current.weight + ": nl"); break;
+                    default:  System.out.println(tacks + current.weight + ": " + (char)current.value); break;
                 }
             }
-
-            // else display level and weight
             else
-                System.out.println(tacks + curr.weight);
+                System.out.println(tacks + current.weight);
 
             // increment level marker
             tacks += "- ";
             // recursively call in pre-order
-            getTree(curr.leftTree);
-            getTree(curr.rightTree);
+            getTree(current.leftTree);
+            getTree(current.rightTree);
             // decrement level marker
             tacks = tacks.substring(0, tacks.length()-2);
         }
 
-        public int getSize() { return this.size; }
+        String encode(String input){
+            StringBuilder sb = new StringBuilder();
 
+            for (int x = 0; x < input.length(); x++)
+                for (int i = 0; i < value.size(); i++)
+                    if (value.get(i) == input.charAt(x))
+                        sb.append(path.get(i));
 
-        public String encode(String input){
-            // create empty string to hold code
-            String str = "";
-
-            // iterate through given string
-            for (int x = 0; x < input.length(); x++) {
-                // iterate through code tables
-                for (int i = 0; i < valueTable.size(); i++) {
-                    // if char in string matches code in table, add path to string
-                    if (valueTable.get(i) == input.charAt(x))
-                        str += pathTable.get(i);
-                }
-            }
-            return str;
+            return sb.toString();
         }
 
 
-        public String decode(String bits) {
-            // create empty string to hold decoded message
-            String decodedStr = "";
-
+        String decode(String bits) {
+            StringBuilder sb = new StringBuilder();
             // iterate through bits
-            for (int i = 0; i < bits.length(); i++) {
+            for (int i = 0; i < bits.length(); i++)
                 if (!getChar(bits.substring(0, i+1)).equals("")) {
-                    decodedStr += getChar(bits.substring(0, i+1));
+                    sb.append(getChar(bits.substring(0, i+1)));
                     bits = bits.substring(i+1);
                     i = 0;
                 }
-            }
-            return decodedStr;
+
+            return sb.toString();
         }
 
         private String getChar(String bits) {
-            // create string to hold potential character
             String character = "";
-            // traverse code table to seek match
-            for (int i = 0; i < pathTable.size(); i++) {
-                // add to string if match is found
-                if (pathTable.get(i).equals(bits))
-                    character = valueTable.get(i).toString();
-            }
+
+            for (int i = 0; i < path.size(); i++)
+                if (path.get(i).equals(bits))
+                    character = value.get(i).toString();
+
             return character;
         }
     }
 
-    // driver program -- main
+
     public static void main(String[] args) {
         // fields
         int freq[] = {10, 15, 12, 3, 4, 13, 1};
         char code[] = {'a', 'e', 'i', 's', 't', ' ', '\n'};
 
         // build Huffman Tree using given codes/frequencies
-        HuffTree hTree = new HuffTree(freq, code);
+        Tree hTree = new Tree(freq, code);
 
         // display contents of Huffman Tree in Pre-Order Traversal
         System.out.println("Display Tree:");
-        HuffNode curr = hTree.root;
+        Node curr = hTree.root;
         hTree.getTree(curr);
-        System.out.println("");
+        System.out.println();
 
         // encode 'tea'
         System.out.println("Encode 'tea': " + hTree.encode("tea") +"\n");
