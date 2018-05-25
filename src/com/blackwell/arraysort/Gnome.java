@@ -7,7 +7,7 @@ package com.blackwell.arraysort;
  */
 public class Gnome {
     public static long sort(int[] arr) {
-        long StartTime = System.nanoTime();
+            long StartTime = System.nanoTime();
 
         int i=1;
         while (i<arr.length){
