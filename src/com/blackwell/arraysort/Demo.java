@@ -10,12 +10,22 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class Demo {
-    private static final int ARR_SIZE = 10_000;
-    private static final int BOUND = ARR_SIZE*10;
+    private static final int ARR_SIZE = 500_000;
+    private static final int BOUND = 1_000_000;
 
     private static final String ClassPath = "com.blackwell.arraysort.";
     private static final String[] SortsName = {"Bubble", "Comb", "Shell", "Insertion", "Quick", "Selection",
-            "Shaker", "Tree", "Gnome", "Merge", "Heap", "Counting", "Radix", "Bucket", "Bitonic", "Timsort"};
+            "Shaker", "Tree", "Gnome", "Merge", "Heap", "Counting", "Radix", "Bucket", "Bitonic", "LSD", "MSD"};
+
+
+//    private static final String[] SortsName = {"Comb", "Shell", "Quick",
+//            "Tree", "Merge", "Heap", "Radix", "Bucket", "Bitonic", "LSD", "MSD"};
+
+
+//    private static final String[] SortsName = {"Shell", "Quick", "Merge", "Radix", "LSD", "MSD"};
+
+
+//    private static final String[] SortsName = {"LSD", "MSD"};
 
     private static void FeelRandom(int[] arr){
         Random R = new Random();
@@ -29,7 +39,7 @@ public class Demo {
             for (int j = 1; j < p.length - i; ++j) {
                 long k1 = (long) p[j - 1].getValue();
                 long k2 = (long) p[j].getValue();
-                if (k1 > k2) {
+                if (k1 < k2) {
                     tmp = p[j-1];
                     p[j-1] = p[j];
                     p[j] = tmp;
@@ -42,15 +52,19 @@ public class Demo {
         int[] arr = new int[ARR_SIZE];
         Pair[] sorts = new Pair[SortsName.length];
 
+        int[] startArray = new int[ARR_SIZE];
+        FeelRandom(startArray);
         try {
             for(int i=0; i<SortsName.length; ++i) {
-                FeelRandom(arr);
+                System.arraycopy(startArray,0,arr,0,ARR_SIZE);
+
                 Class<?> clazz = Class.forName(ClassPath + SortsName[i]);
                 Method m = clazz.getMethod("sort", int[].class);
                 long RunTime = (long) m.invoke(null, (Object) arr);
                 sorts[i] = new Pair<>(SortsName[i], RunTime);
-                System.out.println(Arrays.toString(arr));
-                //System.out.println(SortsName[i] + " passed");
+
+                //System.out.println(Arrays.toString(arr));
+                System.out.println(SortsName[i] + " passed");
             }
         } catch (ClassNotFoundException e) {
             System.out.println("Class Not Found Exception");
