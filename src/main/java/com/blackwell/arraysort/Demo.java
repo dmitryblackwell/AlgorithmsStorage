@@ -18,15 +18,6 @@ public class Demo {
             "Shaker", "Tree", "Gnome", "Merge", "Heap", "Counting", "Radix", "Bucket", "Bitonic", "LSD", "MSD"};
 
 
-//    private static final String[] SortsName = {"Comb", "Shell", "Quick",
-//            "Tree", "Merge", "Heap", "Radix", "Bucket", "Bitonic", "LSD", "MSD"};
-
-
-//    private static final String[] SortsName = {"Shell", "Quick", "Merge", "Radix", "LSD", "MSD"};
-
-
-//    private static final String[] SortsName = {"LSD", "MSD"};
-
     private static void FeelRandom(int[] arr){
         Random R = new Random();
         for(int i =0;i<arr.length;++i)
