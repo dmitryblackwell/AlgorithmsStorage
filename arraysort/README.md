@@ -1,6 +1,3 @@
-# AlgorithmsStorage
-All algorithms in one place
-
 ## ArraySort
 **Размер массиыв - 500_000 целых чисел.**
 
