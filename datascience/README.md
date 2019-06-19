@@ -5,13 +5,13 @@
 Finding points for distribution laws.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/dmitryblackwell/AlgorithmsStorage/master/datascince/pics/laws-of-distribution.png" alt="laws-of-distribution" width="500">
+  <img src="https://raw.githubusercontent.com/dmitryblackwell/AlgorithmsStorage/master/datascience/pics/laws-of-distribution.png" alt="laws-of-distribution" width="500">
 </p>
 
 #### Regression analysis
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/dmitryblackwell/AlgorithmsStorage/master/datascince/pics/regression-analysis.png" alt="regression-analysis" width="500">
+  <img src="https://raw.githubusercontent.com/dmitryblackwell/AlgorithmsStorage/master/datascience/pics/https://raw.githubusercontent.com/dmitryblackwell/AlgorithmsStorage/master/datascience/pics/regression-analysis.png" alt="regression-analysis" width="500">
 </p>
 
 
